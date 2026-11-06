@@ -145,6 +145,20 @@ mac-ai-cluster/
 │   └── com.cluster.rpcworker.plist    # macOS LaunchAgent for headless worker boot
 └── docs/
     ├── FOOLPROOF_OFFLINE_CLUSTER_GUIDE.md # Master troubleshooting, diagnostic trees, & FAQ
+    ├── llamacpp/                      # Complete official llama.cpp documentation suite
+    │   ├── INDEX.md                   # Index and application guide for all 12 docs
+    │   ├── rpc.md                     # GGML RPC backend & distributed inference manual
+    │   ├── server.md                  # llama-server complete API endpoints and flags
+    │   ├── multi-gpu.md               # Multi-GPU & tensor splitting architecture
+    │   ├── build.md                   # Full cross-platform CMake build manual
+    │   ├── cli.md                     # llama-cli interactive execution manual
+    │   ├── llama-bench.md             # llama-bench performance benchmarking guide
+    │   ├── quantize.md                # Quantization types & perplexity benchmarks
+    │   ├── performance_tips.md        # Token generation performance optimization
+    │   ├── function-calling.md        # JSON schema parsing and tool calling
+    │   ├── speculative.md             # Speculative decoding manual
+    │   ├── gguf-split.md              # Large model file splitting reference
+    │   └── README.md                  # Upstream master README
     └── local_llm_reference/           # Cloned local eLlama architecture & Metal documentation
         ├── eLlama_README.md
         ├── eLlama_PRODUCT.md
