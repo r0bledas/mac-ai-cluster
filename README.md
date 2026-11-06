@@ -74,9 +74,17 @@ sudo ./scripts/vram_mode.sh off
 ```text
 mac-ai-cluster/
 ├── README.md                          # Master architecture & operation manual
+├── .gitignore                         # Git ignore rules for builds, models, and wheels
+├── bin/                               # Prebuilt binary placeholder (drop prebuilt Mach-O binaries here)
+│   └── README.md
+├── models/                            # GGUF models directory (Node A NVMe storage)
+│   └── README.md
+├── offline_wheels/                    # Local storage for all air-gapped pip wheels
+│   └── README.md
 ├── config/
 │   └── cluster_env.sh                 # Master network IPs, ports, and memory variables
 ├── setup/
+│   ├── fetch_prebuilt_binaries.sh     # Downloads official prebuilt macOS arm64 binaries
 │   ├── optimize_macos_vram.sh         # Persistent VRAM configuration utility
 │   ├── bundle_offline_dependencies.sh # Offline wheels bundler & model cache
 │   ├── 01_thunderbolt_network.sh      # Thunderbolt Bridge + MTU 9000 setup (Preferred)
@@ -93,7 +101,12 @@ mac-ai-cluster/
 │   └── test_offline_inference.py      # Pure Python offline streaming verification
 ├── services/
 │   └── com.cluster.rpcworker.plist    # macOS LaunchAgent for headless worker boot
-└── offline_wheels/                    # Local storage for all air-gapped pip wheels
+└── docs/
+    ├── FOOLPROOF_OFFLINE_CLUSTER_GUIDE.md # Master troubleshooting, diagnostic trees, & FAQ
+    └── local_llm_reference/           # Cloned local eLlama architecture & Metal documentation
+        ├── eLlama_README.md
+        ├── eLlama_PRODUCT.md
+        └── eLlama_macOS_README.md
 ```
 
 ---

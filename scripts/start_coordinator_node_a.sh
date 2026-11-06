@@ -10,15 +10,16 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../config/cluster_env.sh"
 
-SERVER_BIN="$LLAMA_DIR/build/bin/llama-server"
+SERVER_BIN=$(resolve_binary "llama-server")
 
 echo "=========================================================="
 echo " Starting Cluster Coordinator on Node A (M2 Air 16GB)"
 echo "=========================================================="
 
-if [[ ! -f "$SERVER_BIN" ]]; then
-    echo "[!] Error: llama-server binary not found at $SERVER_BIN."
-    echo "    Please run $SCRIPT_DIR/../setup/02_build_llamacpp.sh first."
+if [[ -z "$SERVER_BIN" || ! -f "$SERVER_BIN" ]]; then
+    echo "[!] Error: llama-server binary not found."
+    echo "    Either drop precompiled binaries into $PREBUILT_BIN_DIR"
+    echo "    or run $SCRIPT_DIR/../setup/02_build_llamacpp.sh first."
     exit 1
 fi
 

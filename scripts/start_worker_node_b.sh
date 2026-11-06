@@ -9,15 +9,16 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../config/cluster_env.sh"
 
-RPC_BIN="$LLAMA_DIR/build/bin/rpc-server"
+RPC_BIN=$(resolve_binary "rpc-server")
 
 echo "=========================================================="
 echo " Starting RPC Worker on Node B (M2 Pro 8GB)"
 echo "=========================================================="
 
-if [[ ! -f "$RPC_BIN" ]]; then
-    echo "[!] Error: rpc-server binary not found at $RPC_BIN."
-    echo "    Please run $SCRIPT_DIR/../setup/02_build_llamacpp.sh first."
+if [[ -z "$RPC_BIN" || ! -f "$RPC_BIN" ]]; then
+    echo "[!] Error: rpc-server binary not found."
+    echo "    Either drop precompiled binaries into $PREBUILT_BIN_DIR"
+    echo "    or run $SCRIPT_DIR/../setup/02_build_llamacpp.sh first."
     exit 1
 fi
 

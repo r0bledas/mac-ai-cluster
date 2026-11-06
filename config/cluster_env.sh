@@ -34,13 +34,27 @@ export LLAMA_FLASH_ATTN="1"           # Enable Flash Attention (Metal optimized)
 # --- Offline Flags ---
 export HF_HUB_OFFLINE="1"             # Prevent Hugging Face Hub phoning home
 export TRANSFORMERS_OFFLINE="1"
+export HF_DATASETS_OFFLINE="1"
 
 # --- Default Paths ---
 export CLUSTER_ROOT="$HOME/mac-ai-cluster"
+export PREBUILT_BIN_DIR="$CLUSTER_ROOT/bin"
 export LLAMA_DIR="$CLUSTER_ROOT/llama.cpp"
 export MODELS_DIR="$CLUSTER_ROOT/models"
 export EXO_DIR="$CLUSTER_ROOT/exo"
 export WHEELS_DIR="$CLUSTER_ROOT/offline_wheels"
+
+# Helper function to resolve binary locations (prebuilt bin/ vs compiled build/bin/)
+resolve_binary() {
+    local bin_name="$1"
+    if [[ -x "$PREBUILT_BIN_DIR/$bin_name" ]]; then
+        echo "$PREBUILT_BIN_DIR/$bin_name"
+    elif [[ -x "$LLAMA_DIR/build/bin/$bin_name" ]]; then
+        echo "$LLAMA_DIR/build/bin/$bin_name"
+    else
+        echo ""
+    fi
+}
 
 # Helper function to print cluster status
 cluster_info() {
