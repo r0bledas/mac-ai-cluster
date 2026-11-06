@@ -1,0 +1,40 @@
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Build artifacts & binaries
+build/
+dist/
+bin/
+*.o
+*.a
+*.dylib
+*.so
+*.dll
+*.exe
+
+# Large model files & quantizations
+models/*.gguf
+models/*.bin
+*.gguf
+*.bin
+*.safetensors
+
+# Cloned sub-repositories (built locally)
+llama.cpp/
+exo/
+
+# Python cache & offline wheel packages
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+offline_wheels/*.whl
+
+# Logs & temporary runtime files
+*.log
+*.err
+/tmp/
