@@ -4,6 +4,28 @@ An exhaustive operational guide, troubleshooting manual, edge-case playbook, and
 
 ---
 
+## 0. Hardware & System Prerequisites
+
+Ensure you have gathered all hardware and verified system tools before taking the cluster into an air-gapped environment:
+
+### Hardware Requirements
+* **Node A (Coordinator)**: Apple Silicon M2 MacBook Air (16 GB Unified LPDDR5).
+* **Node B (Worker)**: Apple Silicon M2 MacBook Pro (8 GB Unified LPDDR5).
+* **Interconnect Cable**: Authentic **Active Thunderbolt 3, TB4, or active USB4 cable** (40 Gbps marked with `⚡`).
+  * *Important*: Standard white Apple charging cables are limited to USB 2.0 (480 Mbps) and will severely choke tensor transfer.
+* **Alternative Interconnect**: Two USB-C to Ethernet (1GbE / 2.5GbE / 10GbE) adapters with a Cat6/Cat6a patch cable (Auto-MDIX).
+* **Power Adapter**: Required for Node B to stay awake with lid closed in headless clamshell mode.
+* **Local Storage**: 20–30 GB free NVMe space on Node A for `.gguf` models; ~2 GB free space on Node B.
+
+### Software Requirements
+* **macOS**: macOS 13.0 (Ventura), macOS 14.0 (Sonoma), or macOS 15.0+ (Sequoia).
+* **Xcode Command Line Tools**: `xcode-select --install` (provides `clang`, `git`, and Metal headers).
+* **CMake**: Version 3.20+ (`brew install cmake` or static binary).
+* **Python**: Python 3.10+ (macOS native or `uv`), only if using **Exo** or Python test utilities.
+* **Privileges**: Administrator / `sudo` access on both Macs.
+
+---
+
 ## 1. Diagnostic Decision Trees
 
 ### 1.1 Network Interconnect Diagnostic Tree

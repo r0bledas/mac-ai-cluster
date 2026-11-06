@@ -19,7 +19,37 @@ An end-to-end engineering blueprint and execution kit for clustering an **Apple 
 
 ---
 
-## 2. On-Demand VRAM Control Modes
+## 2. Prerequisites & System Requirements
+
+Before configuring or deploying the cluster, verify that you meet the following hardware, interconnect, and software prerequisites:
+
+### 2.1 Hardware Requirements
+* **Node A (Coordinator)**: Apple Silicon M2 MacBook Air with 16 GB Unified Memory.
+* **Node B (Worker)**: Apple Silicon M2 MacBook Pro with 8 GB Unified Memory.
+* **Primary Interconnect**: Authentic **Active Thunderbolt 3, TB4, or active USB4 cable** rated for **40 Gbps** (marked with the `⚡` lightning bolt).
+  * *Warning*: Do NOT use standard white Apple USB-C charging cables (wired only for USB 2.0 at 480 Mbps).
+* **Fallback Interconnect**: Two USB-C to Ethernet (1GbE / 2.5GbE / 10GbE) adapters linked with a Cat6 or Cat6a patch cable (Auto-MDIX).
+* **Power Supplies**: AC power adapter for both laptops (specifically required on Node B to enable closed-lid clamshell headless operation).
+* **Local Storage**:
+  * **Node A (Air)**: 20–30 GB free NVMe storage to hold `.gguf` model weights.
+  * **Node B (Pro)**: ~2 GB free storage (Node B acts as a stateless compute worker; models are never stored on its SSD).
+
+### 2.2 Software & Toolchain Requirements (macOS)
+* **macOS Version**: macOS 13.0 (Ventura), macOS 14.0 (Sonoma), or macOS 15.0+ (Sequoia) on both machines.
+* **Xcode Command Line Tools**:
+  ```bash
+  xcode-select --install
+  ```
+  *(Provides Apple `clang`, `git`, `make`, and native Metal framework developer headers).*
+* **Build System (If compiling from source)**:
+  * CMake 3.20+ installed via Homebrew (`brew install cmake`) or static binary download from [cmake.org](https://cmake.org/download/).
+* **Python Runtime (Optional)**:
+  * Python 3.10+ (macOS native or via `uv`) only required if running **Exo** (`exo-explore/exo`) or the utility scripts (`calculate_split.py` / `test_offline_inference.py`).
+* **Privileges**: Administrator (`sudo`) access on both Macs to configure static bridge IPs, set MTU 9000, and manage `sysctl iogpu.wired_limit_mb`.
+
+---
+
+## 3. On-Demand VRAM Control Modes
 
 Leaving `sysctl iogpu.wired_limit_mb` permanently elevated on an 8 GB or 16 GB Mac can restrict normal apps (browsers, IDEs) when you aren't doing AI. We provide **three clean modes** to elevate memory *only while AI is actively running*:
 
