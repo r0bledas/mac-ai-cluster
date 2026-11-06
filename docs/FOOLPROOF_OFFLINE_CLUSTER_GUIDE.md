@@ -17,12 +17,22 @@ Ensure you have gathered all hardware and verified system tools before taking th
 * **Power Adapter**: Required for Node B to stay awake with lid closed in headless clamshell mode.
 * **Local Storage**: 20–30 GB free NVMe space on Node A for `.gguf` models; ~2 GB free space on Node B.
 
-### Software Requirements
+### Software & Binary Requirements
 * **macOS**: macOS 13.0 (Ventura), macOS 14.0 (Sonoma), or macOS 15.0+ (Sequoia).
 * **Xcode Command Line Tools**: `xcode-select --install` (provides `clang`, `git`, and Metal headers).
 * **CMake**: Version 3.20+ (`brew install cmake` or static binary).
 * **Python**: Python 3.10+ (macOS native or `uv`), only if using **Exo** or Python test utilities.
 * **Privileges**: Administrator / `sudo` access on both Macs.
+
+### Mandatory Binary Prerequisites on Both Nodes
+* **On Node A (MacBook Air 16GB)**:
+  * `llama-server` Mach-O arm64 binary (built with `GGML_METAL=ON` and `GGML_RPC=ON`).
+  * *Or for Exo*: Installed `exo` and `mlx` Python packages.
+* **On Node B (MacBook Pro 8GB)**:
+  * `rpc-server` Mach-O arm64 binary (built with `GGML_METAL=ON` and `GGML_RPC=ON`).
+  * *Or for Exo*: Installed `exo` and `mlx` Python packages.
+
+> **Single-Compile Portability**: Since both Macs use the identical Apple Silicon M2 ARM64 instruction set, binaries compiled on Node A via `./setup/02_build_llamacpp.sh` run natively on Node B. You can simply copy the `llama.cpp/build/bin/` folder directly to Node B's `bin/` directory over AirDrop, USB drive, or Thunderbolt.
 
 ---
 

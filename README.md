@@ -47,6 +47,18 @@ Before configuring or deploying the cluster, verify that you meet the following 
   * Python 3.10+ (macOS native or via `uv`) only required if running **Exo** (`exo-explore/exo`) or the utility scripts (`calculate_split.py` / `test_offline_inference.py`).
 * **Privileges**: Administrator (`sudo`) access on both Macs to configure static bridge IPs, set MTU 9000, and manage `sysctl iogpu.wired_limit_mb`.
 
+### 2.3 Binary Prerequisites on Both Machines (Mandatory for Offline Operation)
+For a 100% offline cluster, **both machines require compiled binaries before severing network/drive access**:
+* **On Node A (MacBook Air 16GB)**:
+  * Must have `llama-server` (built with `GGML_METAL=ON` and `GGML_RPC=ON`).
+  * *Or for Exo*: Python 3.10+ with `exo` and `mlx` packages installed.
+* **On Node B (MacBook Pro 8GB)**:
+  * Must have `rpc-server` (built with `GGML_METAL=ON` and `GGML_RPC=ON`).
+  * *Or for Exo*: Python 3.10+ with `exo` and `mlx` packages installed.
+
+> [!TIP]
+> **Zero-Duplicate Compilation**: Because both machines share the identical Apple Silicon M2 architecture (ARM64), you do **not** need to compile on both machines from scratch. You can run `./setup/02_build_llamacpp.sh` once on Node A, and copy the resulting `llama.cpp/build/bin/` folder directly to Node B's `bin/` directory over AirDrop, USB drive, or Thunderbolt.
+
 ---
 
 ## 3. On-Demand VRAM Control Modes
