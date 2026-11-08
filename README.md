@@ -1,3 +1,15 @@
+# ⚠️ [ARCHIVED / MERGED] M2 Mac Dual-Node Distributed AI Cluster
+
+> [!WARNING]
+> **REPOSITORY MERGED & ARCHIVED**: This project has been officially merged into the master [**Offline-AI-Cluster**](https://github.com/r0bledas/Offline-AI-Cluster) repository.
+> 
+> All future engineering, cross-platform tensor splitting (Apple Silicon Thunderbolt, Windows LAN, Linux), direct upstream binary updating (eLlama style), and offline RAG now live in:
+> 👉 **[https://github.com/r0bledas/Offline-AI-Cluster](https://github.com/r0bledas/Offline-AI-Cluster)**
+>
+> *This repository is preserved in read-only / archived state for historical reference.*
+
+---
+
 # M2 Mac Dual-Node Distributed AI Cluster (Offline Workload)
 
 An end-to-end engineering blueprint and execution kit for clustering an **Apple Silicon M2 MacBook Air (16 GB)** and an **M2 MacBook Pro (8 GB)** into an optimized **19.0 GB Usable VRAM** offline inference engine using **Thunderbolt Bridge** (prioritized) or **Direct Ethernet** (fallback), supporting both **`llama.cpp` RPC** (for native GGUF models) and **`exo`** (for dynamic peer-to-peer MLX sharding) with **Dynamic On-Demand VRAM Switching**.
